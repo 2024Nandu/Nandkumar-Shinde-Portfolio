@@ -1,0 +1,166 @@
+import fs from 'fs';
+import path from 'path';
+
+// Create simple PDF binary header & structure for valid downloadable PDF file
+const pdfContent = `%PDF-1.4
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <<
+      /F1 <<
+        /Type /Font
+        /Subtype /Type1
+        /BaseFont /Helvetica
+      >>
+      /F2 <<
+        /Type /Font
+        /Subtype /Type1
+        /BaseFont /Helvetica-Bold
+      >>
+    >>
+  >>
+  /MediaBox [0 0 612 792]
+  /Contents 4 0 R
+>>
+endobj
+
+4 0 obj
+<< /Length 1200 >>
+stream
+BT
+/F2 22 Tf
+50 740 Td
+(Nandkumar Shinde) Tj
+/F1 10 Tf
+0 -20 Td
+(Location: BTM Layout, Bangalore, India | Email: nandkumarshinde61@gmail.com | Phone: 9353814711) Tj
+0 -15 Td
+(GitHub: https://github.com/2024Nandu | LinkedIn: https://www.linkedin.com/in/nandkumar-shinde-231763305/) Tj
+
+0 -30 Td
+/F2 14 Tf
+(PROFESSIONAL SUMMARY) Tj
+/F1 10 Tf
+0 -15 Td
+(Java Full Stack Developer with hands-on practice in Spring Boot for backend development and HTML/CSS for responsive frontend design.) Tj
+0 -12 Td
+(Strong basics in Java, REST APIs, and database connectivity, with a focus on clean code and continuous learning.) Tj
+
+0 -25 Td
+/F2 14 Tf
+(TECHNICAL SKILLS) Tj
+/F1 10 Tf
+0 -15 Td
+(Languages: Java, JavaScript, HTML5, CSS3) Tj
+0 -12 Td
+(Backend: Spring Boot, Hibernate, Spring Data JPA, Spring MVC, REST APIs, JDBC) Tj
+0 -12 Td
+(Frontend: React.js, Tailwind CSS) Tj
+0 -12 Td
+(Databases: MySQL, SQL, H2 Database) Tj
+0 -12 Td
+(Developer Tools: Git, GitHub, Maven, Postman, IntelliJ IDEA) Tj
+
+0 -25 Td
+/F2 14 Tf
+(PROFESSIONAL EXPERIENCE) Tj
+/F2 11 Tf
+0 -15 Td
+(Full Stack Developer Intern | KodNest Academy) Tj
+/F1 10 Tf
+250 0 Td
+(Jan 2026 - Present) Tj
+-250 -12 Td
+(Bengaluru, India) Tj
+0 -15 Td
+(- Developed backend applications using Java and Spring Boot) Tj
+0 -12 Td
+(- Integrated SQL databases for efficient data management) Tj
+0 -12 Td
+(- Built RESTful APIs and implemented CRUD operations) Tj
+0 -12 Td
+(- Collaborated on real-world projects to understand full-stack workflows) Tj
+
+0 -25 Td
+/F2 14 Tf
+(FEATURED PROJECTS) Tj
+/F2 11 Tf
+0 -15 Td
+(AI Voice Mock Interview Platform) Tj
+/F1 10 Tf
+0 -12 Td
+(- Built an AI-powered voice mock interview platform using Java 21, Spring Boot, MySQL, and Spring Security.) Tj
+0 -12 Td
+(- Implemented resume parsing for PDF and DOCX files using Apache PDFBox/POI and LLM conversion.) Tj
+0 -12 Td
+(- Developed React 19 single-page frontend with voice-based Web Speech API & Deepgram TTS.) Tj
+
+/F2 11 Tf
+0 -18 Td
+(Amazon Clone Website) Tj
+/F1 10 Tf
+0 -12 Td
+(- Developed responsive e-commerce layout replicating Amazon homepage design and product card alignment.) Tj
+
+0 -25 Td
+/F2 14 Tf
+(EDUCATION) Tj
+/F2 11 Tf
+0 -15 Td
+(Bachelor of Engineering (B.E.) in Computer Science) Tj
+/F1 10 Tf
+250 0 Td
+(2022 - 2026) Tj
+-250 -12 Td
+(Bheemanna Khandre Institute of Technology, Bhalki | CGPA: 7.0 / 10.0) Tj
+
+0 -25 Td
+/F2 14 Tf
+(CERTIFICATIONS & ACHIEVEMENTS) Tj
+/F1 10 Tf
+0 -15 Td
+(- Cyber Security Certification - Web security, authentication risks, and best practices) Tj
+ET
+endstream
+endobj
+
+xref
+0 5
+0000000000 65535 f 
+0000000010 00000 n 
+0000000060 00000 n 
+0000000115 00000 n 
+0000000350 00000 n 
+trailer
+<<
+  /Size 5
+  /Root 1 0 R
+>>
+startxref
+1600
+%%EOF`;
+
+const publicDir = path.join(process.cwd(), 'public');
+if (!fs.existsSync(publicDir)) {
+  fs.mkdirSync(publicDir, { recursive: true });
+}
+
+fs.writeFileSync(path.join(publicDir, 'resume.pdf'), pdfContent.trim());
+console.log('Successfully generated public/resume.pdf');
